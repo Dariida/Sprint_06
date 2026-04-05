@@ -45,10 +45,8 @@ public class MainPage {
         WebElement question = driver.findElements(accordionQuestions).get(index);
         // Прокручиваем к элементу, чтобы он точно попал в видимую область
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", question);
-        // Небольшая пауза для завершения скролла
-        try { Thread.sleep(300);
-        } catch (InterruptedException e) { }
-        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", question);
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(3));
+        wait.until(ExpectedConditions.elementToBeClickable(question)).click();
     }
 
     // Получить текст ответа на вопрос с индексом index
